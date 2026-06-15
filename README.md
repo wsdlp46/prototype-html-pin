@@ -18,6 +18,8 @@
 
 可直接用自然语言描述需求，也可配合 [proto-spec-generator](https://github.com/wsdlp46/proto-spec-generator) 产出的标准化规格文档生成更严谨的原型。
 
+> 完整产品工作流建议搭配 [pm-assistant-lrw](https://github.com/wsdlp46/pm-assistant-lrw) Expert，一站式覆盖 PRD → 方案 → 规格 → 原型。
+
 ## 新增能力
 
 - **标签显隐开关**：右侧面板一键隐藏所有标注圆点，适合截图展示纯界面
