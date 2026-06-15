@@ -56,3 +56,7 @@ prototype-html-pin/
 ## 许可
 
 Apache 2.0 — 与原项目保持一致。
+
+## 作者
+
+赖人伟 &nbsp; | &nbsp; [lrw0591@qq.com](mailto:lrw0591@qq.com) &nbsp; | &nbsp; 微信：lrw0591
