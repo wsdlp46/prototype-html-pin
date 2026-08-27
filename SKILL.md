@@ -1,9 +1,8 @@
 ---
 name: prototype-html-pin
 description: >
-  生成交互式HTML产品原型。采用 scaffold 源文件 + build 构建的工作流，公共样式/侧边栏/连线脚本集中维护。
-  当用户需要创建产品原型、UI界面原型、可交互的HTML演示页面、产品功能展示页面，
-  或提到"原型"、"prototype"、"产品界面"、"UI原型"、"交互原型"、"演示页面"时使用。
+  仅根据已确认页面规格生成或修改带 Pin 标注的交互式单文件 HTML 产品原型，使用 scaffold 源文件和 build 构建。
+  不用于真实业务前端、静态视觉稿、普通展示页面或公共组件抽取；规格未确认时先补规格，不直接出原型。
 agent_created: true
 ---
 
@@ -15,10 +14,10 @@ agent_created: true
 
 ## 核心工作流程
 
-0. **查项目现有资产** - 动手前先查项目 `03-原型设计/` 下是否已有 `_scaffold/` 或既有原型。**有则直接复用**，不从 skill 复制新的；没有才把 skill 的 `assets/scaffold/` 复制进项目。同时查项目主色（见"主色查询规则"）。
+0. **查项目现有资产** - 动手前先查目标版本 `04-原型/`；存量线性项目再查 `03-原型设计/`。有 `_scaffold/` 或既有原型时直接复用，不从 skill 复制新的；没有才把 skill 的 `assets/scaffold/` 复制进项目。同时查项目主色（见"主色查询规则"）。
 
 1. **理解需求** - 明确要展示的功能和界面元素。有规格文档（.md）则通读全文；项目有设计规范文档则读取获取配色、字号、组件尺寸等参数。
-2. **风格判定** - 按页面类型定视觉方案：管理后台/B端 → 用 `scaffold/` 体系（见"技术栈要求"）；门户/C端 → 读 `01通用/设计库/web门户-design.md`；移动端H5 → `手机端-design.md`；数据大屏 → 深色底+卡片矩阵。同时读 `01通用/设计库/设计约定.md`。未明确端态默认按管理后台处理。
+2. **风格判定** - 按页面类型定视觉方案：管理后台/B端 → 用 `scaffold/` 体系（见"技术栈要求"）；门户/C端 → 读本 skill `assets/design/web门户-design.md`（同目录有脱敏快照案例可参照布局）；移动端H5 → 政务/强调色风读 `assets/design/手机端-design.md`，电商/钱包/订单/个人中心类读 `assets/design/手机端-极简黑白-design.md`（项目有品牌色规范时按其叠加规则只覆盖操作色）；数据大屏 → 深色底+卡片矩阵。同时读 `01通用规则/设计库/设计约定.md`。未明确端态默认按管理后台处理。
 3. **规格匹配** - 从规格文档提取 UI 元素清单（表格列、卡片字段、按钮、弹窗层级、筛选条件）。只做规格明确要求的，不擅自添加。不确定的枚举值只放第一个并标注待确认。
 4. **设计标注** - 选定 3-8 个关键元素（视页面复杂度），用 `data-proto-id` 标记，规划右侧说明条目。
 5. **编写源文件** - 后台页面复制 `scaffold/examples/` 最接近的 `.src.html` 改，不从零写。改完跑 build.sh 生成产物。
@@ -55,7 +54,7 @@ agent_created: true
 |------|------|
 | `proto-base.css` | 公共基线：`:root` 变量、布局骨架（78/22 分栏）、顶栏、侧边栏、卡片、表格、Tag、详情页组件、时间线、响应式 |
 | `proto-sidebar-admin.html` | 标准侧边栏 HTML 片段（含 logo、菜单组、data-href 跳转、折叠按钮） |
-| `proto-connect.js` | 标注交互：自动标记当前页 active、SVG 连线绘制、hover 高亮、侧边栏折叠 |
+| `proto-connect.js` | 标注交互：自动标记当前页 active、Pin 红点标注、hover 高亮、侧边栏折叠 |
 | `build.sh` | 把 `.src.html` 的占位符替换为公共资产，生成单文件 `.html` |
 | `examples/` | 4 个代表性页面源文件（列表/表单/详情/看板），复制改造用 |
 
@@ -84,17 +83,17 @@ agent_created: true
 ### 构建与交付
 
 ```bash
-# 在项目的 03-原型设计/HTML/ 目录下（需先把 scaffold/ 复制进去）
-./scaffold/build.sh          # 构建所有 *.src.html
-./scaffold/build.sh AD1      # 只构建匹配 AD1*.src.html 的页面
+# 在目标版本的 04-原型/ 目录下（需先把 _scaffold/ 复制进去）
+./_scaffold/build.sh          # 构建全部 *.src.html
+./_scaffold/build.sh AD1      # 只构建匹配 AD1*.src.html 的页面
 ```
 
 产物是单文件 `.html`（去掉 `.src`），所有 CSS/HTML/JS 内联，可直接双击打开或分发。**交付产物，不交付源文件**。
 
 ### 其他端态（非后台）
 
-- 门户/C端：读 `01通用/设计库/web门户-design.md`，单文件 HTML + Tailwind，不走 scaffold
-- 移动端H5：读 `手机端-design.md`，单文件 HTML
+- 门户/C端：读本 skill `assets/design/web门户-design.md`，单文件 HTML + Tailwind，不走 scaffold
+- 移动端H5：读本 skill `assets/design/手机端-design.md`，单文件 HTML
 - 数据大屏：深色底 + ECharts，单文件 HTML
 
 ### 主色查询规则（画原型前第一步，必执行）
@@ -106,14 +105,14 @@ agent_created: true
 3. 两者都查不到，用 scaffold 默认 `--brand: #1E63B2`（可按项目改为 `#1677FF` 等）
 4. 找到后修改 `proto-base.css` 的 `:root` 中 `--brand` 三档变量（brand / brand-hover / brand-bg）
 
-> scaffold 的 proto-base.css 默认主色 #1E63B2（示例项目色）。新项目应在项目本地复制 scaffold 后改主色，不改 skill 源文件。
+> scaffold 的 proto-base.css 默认主色 #1E63B2（政务蓝，取自首个应用项目）。新项目应在项目本地复制 scaffold 后改主色，不改 skill 源文件。
 
 ## 布局规范
 
 - **左右分栏**：左侧产品界面 78%，右侧功能说明 22%（scaffold 已内置，`.main-content` + `.doc-panel`）
 - **独立滚动**：左右两栏各自独立滚动
 - **右侧说明区**：琥珀色系（`--amber-bg: #FFFBEB` + `--amber-border: #fde68a`）
-- **标注方案**：Pin 红色圆点标注（`data-anchor` + `data-pin`），技术细节见 `assets/workflows/pin-technical.html`。`assets/example.html` 和 `assets/annotation-demo.html` 是完整演示
+- **标注方案**：Pin 红色圆点标注（`data-proto-id` + `data-proto-desc`）。被标注元素右边缘贴红点圆标，hover 与右侧说明项联动高亮。**不画连线**。技术细节见 `assets/workflows/pin-technical.md`，`assets/annotation-demo.html` 是效果演示
 
 ## 样式与视觉规范
 
@@ -145,7 +144,7 @@ scaffold 的 proto-sidebar-admin.html 含标准侧边栏，proto-connect.js 的 
 **按场景触发读取的流程文档（`assets/workflows/`）：**
 - `iteration.md` — 改已有原型时读（六步迭代工作流）
 - `delivery-checklist.md` — 交付前读（自查清单）
-- `pin-technical.md` — 实现标注时读（连线/圆点技术要点）
+- `pin-technical.md` — 实现标注时读（Pin 红点标注技术要点）
 
 **辅助资产：**
 - `assets/tokens/antd-tokens.md` — antd v5 Token 速查

@@ -2,7 +2,7 @@
 <html lang="zh-CN">
 <head>
 <meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>PG3 用户管理列表页 — 管理系统</title>
+<title>A29 用户管理列表页 — 数据空间平台管理端</title>
 <script src="https://cdn.tailwindcss.com"></script><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
 <!-- SCAFFOLD:CSS -->
 <style>
@@ -52,7 +52,7 @@
           <div class="page-title">用户管理</div>
           <div class="page-subtitle">各机构下可登录工作台的用户账号，支持查看详情、修改手机号、冻结/恢复、注销。</div>
           <div class="proto-element filter-bar" data-proto-id="1">
-            <div class="filter-item"><span class="filter-label">所属机构</span><select class="filter-select"><option>全部</option><option>示例研究院</option></select></div>
+            <div class="filter-item"><span class="filter-label">所属机构</span><select class="filter-select"><option>全部</option><option>XX环境科学研究院</option></select></div>
             <div class="filter-item"><span class="filter-label">账号状态</span><select class="filter-select"><option>全部</option><option>正常</option><option>冻结</option><option>已注销</option></select></div>
             <div class="filter-item"><i class="fas fa-search" style="color:var(--slate-400);font-size:13px;"></i><input class="filter-input" placeholder="姓名 / 手机号"></div>
             <button class="filter-btn primary">查询</button><button class="filter-btn ghost">重置</button>
@@ -62,9 +62,9 @@
               <table class="data-table">
                 <thead><tr><th>用户姓名</th><th>手机号</th><th>所属机构</th><th style="width:80px;">账号状态</th><th style="width:130px;">最近登录</th><th style="width:130px;">注册时间</th><th style="width:180px;text-align:center;">操作</th></tr></thead>
                 <tbody>
-                  <tr><td style="font-weight:500;color:var(--slate-800);">张三</td><td>138****5678</td><td>示例研究院</td><td><span class="status-dot dot-green"></span>正常</td><td>2026-06-25 09:30</td><td>2026-03-12 14:20</td><td style="text-align:center;"><span class="proto-element action-link" data-proto-id="3" onclick="openPanel('viewPanel')">查看</span> <span style="color:var(--slate-300);margin:0 2px;">|</span> <span class="action-link" onclick="openPanel('editPanel')">编辑</span> <span style="color:var(--slate-300);margin:0 2px;">|</span> <span class="action-link" onclick="navigateTo('#')">冻结</span> <span style="color:var(--slate-300);margin:0 2px;">|</span> <span class="action-link" style="color:var(--error);" onclick="navigateTo('#')">注销</span></td></tr>
-                  <tr><td style="font-weight:500;color:var(--slate-800);">李四</td><td>139****9012</td><td>示例研究院</td><td><span class="status-dot dot-green"></span>正常</td><td>2026-06-24 16:15</td><td>2026-03-12 15:30</td><td style="text-align:center;"><span class="action-link" onclick="openPanel('viewPanel')">查看</span> <span style="color:var(--slate-300);margin:0 2px;">|</span> <span class="action-link" onclick="navigateTo('#')">编辑</span> <span style="color:var(--slate-300);margin:0 2px;">|</span> <span class="action-link" onclick="navigateTo('#')">冻结</span> <span style="color:var(--slate-300);margin:0 2px;">|</span> <span class="action-link" style="color:var(--error);" onclick="navigateTo('#')">注销</span></td></tr>
-                  <tr><td style="font-weight:500;color:var(--slate-800);">王运维</td><td>137****3456</td><td>智慧城市运营中心</td><td><span class="status-dot dot-orange"></span>冻结</td><td>2026-06-10 08:45</td><td>2026-02-28 09:45</td><td style="text-align:center;"><span class="action-link" onclick="openPanel('viewPanel')">查看</span> <span style="color:var(--slate-300);margin:0 2px;">|</span> <span class="action-link" onclick="navigateTo('#')">编辑</span> <span style="color:var(--slate-300);margin:0 2px;">|</span> <span class="proto-element action-link" data-proto-id="4" onclick="navigateTo('#')">恢复</span> <span style="color:var(--slate-300);margin:0 2px;">|</span> <span class="action-link" style="color:var(--error);" onclick="navigateTo('#')">注销</span></td></tr>
+                  <tr><td style="font-weight:500;color:var(--slate-800);">张管理</td><td>138****5678</td><td>XX环境科学研究院</td><td><span class="status-dot dot-green"></span>正常</td><td>2026-06-25 09:30</td><td>2026-03-12 14:20</td><td style="text-align:center;"><span class="proto-element action-link" data-proto-id="3" onclick="openPanel('viewPanel')">查看</span> <span style="color:var(--slate-300);margin:0 2px;">|</span> <span class="action-link" onclick="openPanel('editPanel')">编辑</span> <span style="color:var(--slate-300);margin:0 2px;">|</span> <span class="action-link" onclick="navigateTo('#')">冻结</span> <span style="color:var(--slate-300);margin:0 2px;">|</span> <span class="action-link" style="color:var(--error);" onclick="navigateTo('#')">注销</span></td></tr>
+                  <tr><td style="font-weight:500;color:var(--slate-800);">李数据员</td><td>139****9012</td><td>XX环境科学研究院</td><td><span class="status-dot dot-green"></span>正常</td><td>2026-06-24 16:15</td><td>2026-03-12 15:30</td><td style="text-align:center;"><span class="action-link" onclick="openPanel('viewPanel')">查看</span> <span style="color:var(--slate-300);margin:0 2px;">|</span> <span class="action-link" onclick="navigateTo('#')">编辑</span> <span style="color:var(--slate-300);margin:0 2px;">|</span> <span class="action-link" onclick="navigateTo('#')">冻结</span> <span style="color:var(--slate-300);margin:0 2px;">|</span> <span class="action-link" style="color:var(--error);" onclick="navigateTo('#')">注销</span></td></tr>
+                  <tr><td style="font-weight:500;color:var(--slate-800);">王运维</td><td>137****3456</td><td>XX智慧城市运营中心</td><td><span class="status-dot dot-orange"></span>冻结</td><td>2026-06-10 08:45</td><td>2026-02-28 09:45</td><td style="text-align:center;"><span class="action-link" onclick="openPanel('viewPanel')">查看</span> <span style="color:var(--slate-300);margin:0 2px;">|</span> <span class="action-link" onclick="navigateTo('#')">编辑</span> <span style="color:var(--slate-300);margin:0 2px;">|</span> <span class="proto-element action-link" data-proto-id="4" onclick="navigateTo('#')">恢复</span> <span style="color:var(--slate-300);margin:0 2px;">|</span> <span class="action-link" style="color:var(--error);" onclick="navigateTo('#')">注销</span></td></tr>
                   <tr><td style="color:var(--slate-400);">赵某人</td><td>136****7890</td><td>征信服务中心</td><td><span class="status-dot dot-gray"></span>已注销</td><td>—</td><td>2025-11-03 13:25</td><td style="text-align:center;"><span class="action-link" onclick="openPanel('viewPanel')">查看</span></td></tr>
                   <tr><td style="font-weight:500;color:var(--slate-800);">刘分析师</td><td>158****4321</td><td>碳中和研究中心</td><td><span class="status-dot dot-green"></span>正常</td><td>2026-06-25 11:00</td><td>2026-01-20 11:08</td><td style="text-align:center;"><span class="action-link" onclick="openPanel('viewPanel')">查看</span> <span style="color:var(--slate-300);margin:0 2px;">|</span> <span class="action-link" onclick="navigateTo('#')">编辑</span> <span style="color:var(--slate-300);margin:0 2px;">|</span> <span class="action-link" onclick="navigateTo('#')">冻结</span> <span style="color:var(--slate-300);margin:0 2px;">|</span> <span class="action-link" style="color:var(--error);" onclick="navigateTo('#')">注销</span></td></tr>
                 </tbody>
@@ -78,7 +78,7 @@
   </div>
   <div style="width:1px; background:var(--amber-border); flex-shrink:0;"></div>
   <div class="doc-panel" id="rightPanel">
-    <div style="margin-bottom:14px; padding:10px 12px; background:var(--amber-border); border-radius:6px; display:flex; align-items:center; gap:8px;"><span style="background:var(--amber-accent); color:#fff; font-size:10px; font-weight:700; padding:2px 8px; border-radius:3px;">PROTOTYPE</span><span style="font-size:12px; font-weight:600; color:var(--amber-accent);">PG3 用户管理列表页</span></div>
+    <div style="margin-bottom:14px; padding:10px 12px; background:var(--amber-border); border-radius:6px; display:flex; align-items:center; gap:8px;"><span style="background:var(--amber-accent); color:#fff; font-size:10px; font-weight:700; padding:2px 8px; border-radius:3px;">PROTOTYPE</span><span style="font-size:12px; font-weight:600; color:var(--amber-accent);">A29 用户管理列表页</span></div>
     <h2>功能说明文档</h2>
     <div class="proto-desc doc-section" data-proto-desc="1"><div class="doc-label"><span class="doc-num">1</span> 筛选栏</div><div class="doc-desc">三项筛选：所属机构下拉、账号状态下拉（正常/冻结/已注销）、姓名/手机号模糊搜索。查询后列表刷新。</div></div>
     <div class="proto-desc doc-section" data-proto-desc="2"><div class="doc-label"><span class="doc-num">2</span> 列表表格</div><div class="doc-desc">七列：用户姓名、手机号（脱敏）、所属机构、账号状态（三态：正常/冻结/已注销）、最近登录、注册时间、操作。账号由用户自行注册，管理端不代建；密码由用户手机验证码自助找回，管理端不操作密码（决策4）。</div></div>
@@ -96,9 +96,9 @@
       <!-- 基本资料 -->
       <h3 style="font-size:13px;font-weight:600;color:var(--slate-700);margin-bottom:14px;padding-bottom:8px;border-bottom:1px solid var(--slate-100)">基本资料</h3>
       <div class="info-grid" style="display:grid;grid-template-columns:1fr 1fr;gap:14px 24px;margin-bottom:24px">
-        <div class="info-item" style="display:flex;flex-direction:column;gap:3px"><div style="font-size:11px;color:var(--slate-400)">用户姓名</div><div style="font-size:13px;color:var(--slate-700)">张三</div></div>
+        <div class="info-item" style="display:flex;flex-direction:column;gap:3px"><div style="font-size:11px;color:var(--slate-400)">用户姓名</div><div style="font-size:13px;color:var(--slate-700)">张管理</div></div>
         <div class="info-item" style="display:flex;flex-direction:column;gap:3px"><div style="font-size:11px;color:var(--slate-400)">手机号</div><div style="font-size:13px;color:var(--slate-700);font-family:'SF Mono',Menlo,monospace">13812345678</div></div>
-        <div class="info-item" style="display:flex;flex-direction:column;gap:3px"><div style="font-size:11px;color:var(--slate-400)">所属机构</div><div style="font-size:13px;color:var(--slate-700)">示例研究院</div></div>
+        <div class="info-item" style="display:flex;flex-direction:column;gap:3px"><div style="font-size:11px;color:var(--slate-400)">所属机构</div><div style="font-size:13px;color:var(--slate-700)">XX环境科学研究院</div></div>
         <div class="info-item" style="display:flex;flex-direction:column;gap:3px"><div style="font-size:11px;color:var(--slate-400)">账号状态</div><div style="font-size:13px;color:var(--slate-700)"><span class="status-dot dot-green"></span> 正常</div></div>
         <div class="info-item" style="display:flex;flex-direction:column;gap:3px"><div style="font-size:11px;color:var(--slate-400)">注册时间</div><div style="font-size:13px;color:var(--slate-700)">2026-03-12 14:20</div></div>
         <div class="info-item" style="display:flex;flex-direction:column;gap:3px"><div style="font-size:11px;color:var(--slate-400)">最近登录</div><div style="font-size:13px;color:var(--slate-700)">2026-06-25 09:30</div></div>
@@ -133,8 +133,8 @@
   <div class="slide-panel" id="editPanel">
     <div class="slide-header"><span>编辑用户</span><i class="fas fa-times" style="cursor:pointer;color:var(--slate-400);font-size:18px;" onclick="closePanel('editPanel')"></i></div>
     <div class="slide-body">
-      <div class="form-group"><label>所属机构</label><input class="readonly" value="示例研究院" readonly></div>
-      <div class="form-group"><label>用户姓名 <span style="color:var(--error);">*</span></label><input value="张三"></div>
+      <div class="form-group"><label>所属机构</label><input class="readonly" value="XX环境科学研究院" readonly></div>
+      <div class="form-group"><label>用户姓名 <span style="color:var(--error);">*</span></label><input value="张管理"></div>
       <div class="form-group"><label>手机号 <span style="color:var(--error);">*</span></label><input value="13812345678" placeholder="需校验唯一性"></div>
     </div>
     <div class="slide-footer"><button class="btn btn-ghost" onclick="closePanel('editPanel')">取消</button><button class="btn btn-primary" onclick="closePanel('editPanel')">保存</button></div>

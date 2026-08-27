@@ -118,12 +118,15 @@ body {
   box-shadow: 0 2px 8px rgba(217,119,6,0.15);
 }
 
-/* SVG connections（连线层） */
-#connections-svg { position: absolute; top: 0; left: 0; width: 100%; height: 100%; pointer-events: none; z-index: 50; }
-.connection-path { fill: none; stroke: var(--brand); stroke-width: 2; opacity: 0.5; transition: all 0.25s ease; }
-.connection-path.active { stroke-width: 3; opacity: 1; }
-.conn-label-bg { fill: var(--brand); }
-.conn-label-text { fill: #fff; font-size: 11px; font-weight: 700; text-anchor: middle; dominant-baseline: central; }
+/* Pin 红点标注（独立圆点，非连线） */
+.pin-overlay { position: fixed; z-index: 100; pointer-events: auto; width: 22px; height: 22px; border-radius: 50%; background: #F53F3F; display: flex; align-items: center; justify-content: center; font-size: 12px; font-weight: 700; color: #fff; cursor: pointer; box-shadow: 0 2px 6px rgba(0,0,0,0.25); transition: transform 0.15s, box-shadow 0.15s; transform: translate(6px, -50%); }
+.pin-overlay:hover, .pin-overlay.active { transform: translate(6px, -50%) scale(1.3); box-shadow: 0 3px 12px rgba(245,63,63,0.4); }
+.pin-overlay::before { content: ''; position: absolute; right: 100%; top: 50%; width: 8px; height: 2px; background: inherit; }
+.pin-overlay.hidden { display: none; }
+/* 被标注元素的 hover 高亮 */
+.proto-element.pin-highlighted { box-shadow: 0 0 0 2px #F53F3F !important; border-radius: 8px; }
+/* 右侧说明项高亮 */
+.proto-desc.pin-doc-highlight { border-color: #F53F3F !important; background: #FFF1F0 !important; box-shadow: 0 2px 8px rgba(245,63,63,0.12); }
 
 /* Doc panel 文档面板 */
 .doc-panel h2 { font-size: 17px; font-weight: 700; color: var(--slate-800); margin-bottom: 16px; padding-bottom: 10px; border-bottom: 2px solid var(--amber-border); }
@@ -258,6 +261,6 @@ body {
   .app-container { flex-direction: column; }
   .main-content { width: 100%; height: 60vh; }
   .doc-panel { width: 100%; height: 40vh; border-left: none; border-top: 2px solid var(--amber-border); }
-  #connections-svg { display: none; }
+  .pin-overlay { display: none; }
   .sidebar { display: none; }
 }

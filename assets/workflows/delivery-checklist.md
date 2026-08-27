@@ -32,7 +32,7 @@
 ## antd 视觉对齐（仅后台/B 端原型）
 
 - [ ] 主色是否按"主色查询规则"取了项目主色？（不允许直接用 #1677FF 兜底）
-- [ ] 组件是否引用了 `assets/components/base.css` + `components.css`，而非手写样式？
+- [ ] 组件是否复用项目本地 `_scaffold/proto-base.css` 的公共样式和 Token，仅为页面特有结构补充样式？
 - [ ] Tag 状态色是否用了 antd 五档预设（success/processing/warning/error/default）？
 - [ ] 圆角、控件高度、字号是否对齐 Token（6px / 32px / 14px）？
 
@@ -45,8 +45,8 @@
 
 ## 验证手段（重要）
 
-- [ ] **禁止用截图验证**：ZCode 不支持多模态读图，截图无法被识别。用 WebBridge 的 `evaluate` 读 DOM 属性/计算样式，或用 `snapshot` 读 accessibility tree
-- [ ] 验证交互时用 `click` + `evaluate` 组合（点之前读一次状态，点之后读一次，对比变化）
+- [ ] 用可用的浏览器自动化或本地浏览器检查 DOM 属性、计算样式和无障碍树；有图像查看能力时，补充视觉核验。不得只凭截图判断交互是否成功。
+- [ ] 验证交互时，在操作前后读取状态并对比变化；确认弹窗、筛选和状态切换均有实际响应。
 
 ---
 

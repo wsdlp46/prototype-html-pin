@@ -18,7 +18,7 @@
 
 可直接用自然语言描述需求，也可配合 [proto-spec-generator](https://github.com/wsdlp46/proto-spec-generator) 产出的标准化规格文档生成更严谨的原型。
 
-> 完整产品工作流建议搭配 [pm-assistant-lrw](https://github.com/wsdlp46/pm-assistant-lrw) Expert，一站式覆盖 PRD → 方案 → 规格 → 原型。
+> 可配合 [prd-writer](https://github.com/wsdlp46/prd-writer) 与 [proto-spec-generator](https://github.com/wsdlp46/proto-spec-generator) 形成从需求到规格、原型的产品工作流。
 
 ## 新增能力
 
@@ -37,17 +37,13 @@
 
 ## 安装
 
-复制到 AI 工具的 skills 目录：
+克隆仓库后，将目录（含 `SKILL.md`）复制或软链接到目标 AI 工具的 Skills 目录：
 
 ```bash
-# 推荐：使用仓库根目录安装脚本（自动创建软链接）
-cd ~/Skills && bash install.sh
-
-# 或手动复制到工具的 skills 目录
-cp -r prototype-html-pin ~/.workbuddy/skills/
+git clone https://github.com/wsdlp46/prototype-html-pin.git
 ```
 
-适用于任何支持 Skill 机制的 AI 工具（如 CodeBuddy、WorkBuddy、Cursor 等）。
+请按所使用 AI 工具的 Skills 安装说明完成启用。
 
 ## 目录结构
 

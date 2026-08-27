@@ -1,97 +1,92 @@
 /* ==========================================================================
-   proto-connect.js — 数据空间工作台原型公共脚本
-   含：当前页自动高亮(active)、连线系统、标注联动、侧边栏折叠。
-   所有 W*.html 共用。页面特有交互（如 tab 切换）留在各页内联 <script>。
+   proto-connect.js — 原型公共脚本（Pin 红点标注版）
+   含：当前页自动高亮(active)、Pin 标注系统、侧边栏折叠。
+   所有页面共用。页面特有交互留在各页内联 <script>。
    ========================================================================== */
 
 // ==================== 当前页自动标记 active ====================
-// 根据 location.pathname 的文件名，自动给侧边栏对应项加 active 类。
-// 这样 28 个页面共用一份侧边栏 HTML，无需逐页维护 active。
 function markActiveSidebar() {
-  var current = location.pathname.split('/').pop() || 'W0-工作台仪表盘.html';
+  var current = location.pathname.split('/').pop() || 'index.html';
   document.querySelectorAll('#stdSidebar .nav-item[data-href]').forEach(function(item) {
     var href = item.getAttribute('data-href');
-    // 点击跳转
     item.style.cursor = 'pointer';
     item.addEventListener('click', function() { location.href = href; });
-    // 标记 active
     if (href === current) item.classList.add('active');
   });
 }
 
-// ==================== 连线系统 ====================
-// 页面需声明 window.connections 数组：{ id, selector, descSelector }
-function drawConnections() {
-  var svg = document.getElementById('connections-svg');
-  if (!svg) return;
-  var conns = window.connections || [];
-  if (!conns.length) { svg.innerHTML = ''; return; }
-  var container = document.getElementById('appContainer');
-  if (!container) return;
-  var containerRect = container.getBoundingClientRect();
-  svg.setAttribute('viewBox', '0 0 ' + containerRect.width + ' ' + containerRect.height);
-  svg.style.width = containerRect.width + 'px';
-  svg.style.height = containerRect.height + 'px';
-  var html = '';
-  conns.forEach(function(c) {
-    var leftEl = document.querySelector(c.selector);
-    var rightEl = document.querySelector(c.descSelector);
-    if (!leftEl || !rightEl) return;
-    var lr = leftEl.getBoundingClientRect();
-    var rr = rightEl.getBoundingClientRect();
-    var x1 = lr.right - containerRect.left;
-    var y1 = lr.top + lr.height / 2 - containerRect.top;
-    var x2 = rr.left - containerRect.left;
-    var y2 = rr.top + rr.height / 2 - containerRect.top;
-    var cx1 = x1 + (x2 - x1) * 0.4;
-    var cx2 = x1 + (x2 - x1) * 0.6;
-    var d = 'M ' + x1 + ' ' + y1 + ' C ' + cx1 + ' ' + y1 + ', ' + cx2 + ' ' + y2 + ', ' + x2 + ' ' + y2;
-    html += '<path class="connection-path" id="conn-path-' + c.id + '" d="' + d + '" data-conn="' + c.id + '"/>';
-    var mx = x1 + (x2 - x1) * 0.5;
-    var my = y1 + (y2 - y1) * 0.5;
-    html += '<circle cx="' + mx + '" cy="' + my + '" r="9" class="conn-label-bg"/>';
-    html += '<text x="' + mx + '" y="' + my + '" class="conn-label-text">' + c.id + '</text>';
+// ==================== Pin 红点标注系统 ====================
+// 页面元素用 data-proto-id="N" 标注，右侧说明用 data-proto-desc="N"。
+// 脚本自动扫描配对，注入红点，无需声明 window.connections。
+var pinEls = {};      // { '1': <div.pin-overlay>, ... }
+var pinTargets = {};  // { '1': <被标注元素>, ... }
+var pinDocs = {};     // { '1': <右侧说明项>, ... }
+var pinsVisible = true;
+
+function collectPins() {
+  document.querySelectorAll('[data-proto-id]').forEach(function(el) {
+    var id = el.getAttribute('data-proto-id');
+    pinTargets[id] = el;
   });
-  svg.innerHTML = html;
+  document.querySelectorAll('[data-proto-desc]').forEach(function(el) {
+    var id = el.getAttribute('data-proto-desc');
+    pinDocs[id] = el;
+  });
 }
 
-// ==================== 标注联动高亮 ====================
-function setupConnHover() {
-  document.querySelectorAll('.proto-element').forEach(function(el) {
-    el.addEventListener('mouseenter', function() {
-      var pid = el.getAttribute('data-proto-id');
-      if (!pid) return;
-      var path = document.getElementById('conn-path-' + pid);
-      if (path) path.classList.add('active');
-      var desc = document.querySelector('[data-proto-desc="' + pid + '"]');
-      if (desc) desc.classList.add('active-highlight');
-    });
-    el.addEventListener('mouseleave', function() {
-      var pid = el.getAttribute('data-proto-id');
-      if (!pid) return;
-      var path = document.getElementById('conn-path-' + pid);
-      if (path) path.classList.remove('active');
-      var desc = document.querySelector('[data-proto-desc="' + pid + '"]');
-      if (desc) desc.classList.remove('active-highlight');
-    });
+function createPins() {
+  Object.keys(pinTargets).forEach(function(id) {
+    if (pinEls[id]) return;
+    var pin = document.createElement('div');
+    pin.className = 'pin-overlay';
+    pin.textContent = id;
+    pin.setAttribute('data-pin', id);
+    document.body.appendChild(pin);
+    pinEls[id] = pin;
+    // hover 联动
+    pin.addEventListener('mouseenter', function() { highlightPin(id); });
+    pin.addEventListener('mouseleave', clearPinHighlight);
+    var target = pinTargets[id];
+    target.addEventListener('mouseenter', function() { highlightPin(id); });
+    target.addEventListener('mouseleave', clearPinHighlight);
   });
-  document.querySelectorAll('.proto-desc').forEach(function(el) {
-    el.addEventListener('mouseenter', function() {
-      var pid = el.getAttribute('data-proto-desc');
-      if (!pid) return;
-      var path = document.getElementById('conn-path-' + pid);
-      if (path) path.classList.add('active');
-      var proto = document.querySelector('[data-proto-id="' + pid + '"]');
-      if (proto) proto.classList.add('active-highlight');
-    });
-    el.addEventListener('mouseleave', function() {
-      var pid = el.getAttribute('data-proto-desc');
-      if (!pid) return;
-      var path = document.getElementById('conn-path-' + pid);
-      if (path) path.classList.remove('active');
-      var proto = document.querySelector('[data-proto-id="' + pid + '"]');
-      if (proto) proto.classList.remove('active-highlight');
-    });
+  // 右侧说明项 hover
+  Object.keys(pinDocs).forEach(function(id) {
+    var doc = pinDocs[id];
+    doc.addEventListener('mouseenter', function() { highlightPin(id); });
+    doc.addEventListener('mouseleave', clearPinHighlight);
+  });
+  updatePinPositions();
+}
+
+function highlightPin(id) {
+  clearPinHighlight();
+  if (pinEls[id]) pinEls[id].classList.add('active');
+  if (pinTargets[id]) pinTargets[id].classList.add('pin-highlighted');
+  if (pinDocs[id]) pinDocs[id].classList.add('pin-doc-highlight');
+}
+
+function clearPinHighlight() {
+  Object.values(pinEls).forEach(function(p) { p.classList.remove('active'); });
+  Object.values(pinTargets).forEach(function(t) { t.classList.remove('pin-highlighted'); });
+  Object.values(pinDocs).forEach(function(d) { d.classList.remove('pin-doc-highlight'); });
+}
+
+function updatePinPositions() {
+  Object.keys(pinEls).forEach(function(id) {
+    var target = pinTargets[id];
+    if (!target) return;
+    var rect = target.getBoundingClientRect();
+    var pin = pinEls[id];
+    pin.style.left = (rect.right + 2) + 'px';
+    pin.style.top = (rect.top + rect.height / 2) + 'px';
+  });
+}
+
+function setPinsVisible(visible) {
+  pinsVisible = visible;
+  Object.values(pinEls).forEach(function(p) {
+    p.classList.toggle('hidden', !visible);
   });
 }
 
@@ -104,13 +99,17 @@ function toggleStdSidebar(toggleEl) {
   if (icon) {
     icon.className = sidebar.classList.contains('collapsed') ? 'fas fa-chevron-right' : 'fas fa-chevron-left';
   }
-  setTimeout(drawConnections, 350);
+  setTimeout(updatePinPositions, 350);
 }
 
 // ==================== 初始化 ====================
 window.addEventListener('DOMContentLoaded', function() {
   markActiveSidebar();
-  drawConnections();
-  setupConnHover();
+  collectPins();
+  createPins();
+  // 滚动重算位置：监听最近的滚动容器
+  document.querySelectorAll('[id*="leftPanel"], .content-area, .main-content').forEach(function(c) {
+    c.addEventListener('scroll', updatePinPositions);
+  });
 });
-window.addEventListener('resize', drawConnections);
+window.addEventListener('resize', updatePinPositions);

@@ -3,19 +3,19 @@
 # build.sh（管理端） — 把引用公共样板的源页面合并为单文件 HTML 交付物
 #
 # 源页面（编辑区，AI 主要操作这里）：
-#   - 位于 04-原型/ 根目录，文件名 A*.src.html
+#   - 位于 04-原型/ 根目录，文件名 *.src.html
 #   - 用占位符标记公共样板插入点：
-#       <!-- SCAFFOLD:CSS -->      → 内联 _scaffold-admin/proto-base.css
-#       <!-- SCAFFOLD:SIDEBAR -->  → 内联 _scaffold-admin/proto-sidebar-admin.html
-#       <!-- SCAFFOLD:JS -->       → 内联 _scaffold-admin/proto-connect.js
+#       <!-- SCAFFOLD:CSS -->      → 内联 _scaffold/proto-base.css
+#       <!-- SCAFFOLD:SIDEBAR -->  → 内联 _scaffold/proto-sidebar-admin.html
+#       <!-- SCAFFOLD:JS -->       → 内联 _scaffold/proto-connect.js
 #
 # 交付物（构建产物，对外交付/演示用）：
 #   - 输出到 04-原型/ 根目录，文件名 A*.html（去掉 .src）
 #   - 单文件，所有 CSS/HTML/JS 内联，可直接双击打开或分发
 #
 # 用法：
-#   ./build.sh              # 构建所有 A*.src.html
-#   ./build.sh A2           # 只构建匹配 A2*.src.html 的页面
+#   ./build.sh              # 构建所有 *.src.html
+#   ./build.sh AD2          # 只构建匹配 AD2*.src.html 的页面
 # ==========================================================================
 
 set -euo pipefail
@@ -38,15 +38,20 @@ done
 
 # 选择要构建的源文件（兼容 macOS bash 3.x，不用 mapfile）
 FILTER="${1:-}"
+SRC_FILES=()
 if [[ -n "$FILTER" ]]; then
-  SRC_FILES=( $(find "$PROJECT_DIR" -maxdepth 1 -name "${FILTER}*.src.html" | sort) )
+  while IFS= read -r -d '' src; do
+    SRC_FILES+=("$src")
+  done < <(find "$PROJECT_DIR" -maxdepth 1 -name "${FILTER}*.src.html" -print0)
 else
-  SRC_FILES=( $(find "$PROJECT_DIR" -maxdepth 1 -name "A*.src.html" | sort) )
+  while IFS= read -r -d '' src; do
+    SRC_FILES+=("$src")
+  done < <(find "$PROJECT_DIR" -maxdepth 1 -name "*.src.html" -print0)
 fi
 
 if [[ ${#SRC_FILES[@]} -eq 0 ]]; then
   echo "⚠️  未找到 .src.html 源文件。"
-  echo "   源页面应命名为 A*.src.html，放在 $PROJECT_DIR"
+  echo "   源页面应命名为 *.src.html，放在 $PROJECT_DIR"
   exit 0
 fi
 
@@ -87,7 +92,7 @@ if leftover:
 # 产物头部注入警告标记（提示改 src 而非产物）
 warning = (
     "<!-- ⚠️ 构建产物，请勿手改，改动会在下次 build 时丢失。 -->\n"
-    f"<!-- 编辑源文件 {src_name}，然后运行 _scaffold-admin/build.sh 重新生成。 -->\n"
+    f"<!-- 编辑源文件 {src_name}，然后运行 _scaffold/build.sh 重新生成。 -->\n"
 )
 if html.startswith('<!DOCTYPE'):
     html = html.replace('<!DOCTYPE', warning + '<!DOCTYPE', 1)
@@ -99,7 +104,7 @@ print(f"  ✓ {src_name} → {out_name}")
 PYEOF
 }
 
-echo "🔨 开始构建（管理端样板目录: _scaffold-admin/）"
+echo "🔨 开始构建（管理端样板目录: _scaffold/）"
 echo "   源文件数: ${#SRC_FILES[@]}"
 for src in "${SRC_FILES[@]}"; do
   build_one "$src"

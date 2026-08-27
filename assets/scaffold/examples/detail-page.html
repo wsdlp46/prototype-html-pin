@@ -1,10 +1,10 @@
 <!-- ⚠️ 构建产物，请勿手改，改动会在下次 build 时丢失。 -->
-<!-- 编辑源文件 PG30-资源详情页.src.html，然后运行 _scaffold-admin/build.sh 重新生成。 -->
+<!-- 编辑源文件 A30-数据资源详情页.src.html，然后运行 _scaffold-admin/build.sh 重新生成。 -->
 <!DOCTYPE html>
 <html lang="zh-CN">
 <head>
 <meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>PG30 资源详情页 — 管理系统</title>
+<title>A30 数据资源详情页 — 数据空间平台管理端</title>
 <script src="https://cdn.tailwindcss.com"></script><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
 <style>
 /* ==========================================================================
@@ -276,110 +276,115 @@ body {
 <body>
 <div class="app-container" id="appContainer">
   <div class="main-content"><div style="display:flex;flex:1;overflow:hidden;">
-    <!--
-      标准管理后台侧边栏（示例）。
-      data-href 指向各页文件名，新增页面时同步更新本文件。
-      页面编号 PG* 仅为示例，实际项目按《项目工作流规范》第十五节的编号前缀规则命名
-      （管理后台用 AD*，门户用 PT*，工作台用 WS*，等）。
-    -->
     <aside class="sidebar" id="stdSidebar">
-      <div class="sidebar-logo" onclick="location.href='PG1-仪表盘.html'">
+  <div class="sidebar-logo" onclick="location.href='A1-运营大屏页.html'">
     <div class="logo-icon"><i class="fas fa-shield-halved"></i></div>
-    <span class="logo-text">管理系统</span>
-      </div>
-      <nav class="sidebar-nav">
-    <div class="nav-item" data-href="PG1-仪表盘.html">
-      <i class="fas fa-chart-line"></i><span class="nav-text">仪表盘</span>
+    <span class="logo-text">数据空间平台</span>
+  </div>
+  <nav class="sidebar-nav">
+    <div class="nav-item" data-href="A1-运营大屏页.html">
+      <i class="fas fa-chart-line"></i><span class="nav-text">运营大屏</span>
     </div>
 
-    <div class="nav-group-title">用户与权限</div>
-    <div class="nav-item" data-href="PG2-机构管理.html">
+    <div class="nav-group-title">接入管理</div>
+    <div class="nav-item" data-href="A2-机构列表页.html">
       <i class="fas fa-building"></i><span class="nav-text">机构管理</span>
     </div>
-    <div class="nav-item" data-href="PG3-用户管理.html">
+    <div class="nav-item" data-href="A29-用户管理列表页.html">
       <i class="fas fa-user-cog"></i><span class="nav-text">用户管理</span>
     </div>
-    <div class="nav-item" data-href="PG4-角色权限.html">
-      <i class="fas fa-user-shield"></i><span class="nav-text">角色权限</span>
+    <div class="nav-item" data-href="A14-连接器管理列表页.html">
+      <i class="fas fa-plug"></i><span class="nav-text">连接器管理</span>
     </div>
 
-    <div class="nav-group-title">业务管理</div>
-    <div class="nav-item" data-href="PG5-资源目录.html">
-      <i class="fas fa-folder-tree"></i><span class="nav-text">资源目录</span>
+    <div class="nav-group-title">数据治理</div>
+    <div class="nav-item" data-href="A7-目录管理列表页.html">
+      <i class="fas fa-folder-tree"></i><span class="nav-text">数据目录管理</span>
     </div>
-    <div class="nav-item" data-href="PG6-订单管理.html">
-      <i class="fas fa-file-invoice"></i><span class="nav-text">订单管理</span>
-    </div>
-    <div class="nav-item" data-href="PG7-任务监控.html">
-      <i class="fas fa-list-check"></i><span class="nav-text">任务监控</span>
+    <div class="nav-item" data-href="A10-空间管理列表页.html">
+      <i class="fas fa-object-group"></i><span class="nav-text">数据空间管理</span>
     </div>
 
-    <div class="nav-group-title">内容运营</div>
-    <div class="nav-item" data-href="PG8-资讯管理.html">
+    <div class="nav-group-title">流通管控</div>
+    <div class="nav-item" data-href="A17-合约管理列表页.html">
+      <i class="fas fa-file-contract"></i><span class="nav-text">合约管理</span>
+    </div>
+    <div class="nav-item" data-href="A19-任务监控列表页.html">
+      <i class="fas fa-list-check"></i><span class="nav-text">交付任务监控</span>
+    </div>
+
+    <div class="nav-group-title">门户运营</div>
+    <div class="nav-item" data-href="A5-资讯管理页.html">
       <i class="fas fa-newspaper"></i><span class="nav-text">资讯管理</span>
     </div>
-    <div class="nav-item" data-href="PG9-分类配置.html">
+    <div class="nav-item" data-href="A6-分类配置页.html">
       <i class="fas fa-tags"></i><span class="nav-text">分类配置</span>
     </div>
 
     <div class="nav-group-title">审批中心</div>
-    <div class="nav-item" data-href="PG10-审批工作台.html">
+    <div class="nav-item" data-href="A21-审批工作台页.html">
       <i class="fas fa-clipboard-list"></i><span class="nav-text">审批工作台</span>
     </div>
-    <div class="nav-item" data-href="PG11-审批历史.html">
+    <div class="nav-item" data-href="A22-审批历史页.html">
       <i class="fas fa-history"></i><span class="nav-text">审批历史</span>
     </div>
 
-    <div class="nav-group-title">数据分析</div>
-    <div class="nav-item" data-href="PG12-报表看板.html">
+    <div class="nav-group-title">运营分析</div>
+    <div class="nav-item" data-href="A23-报表看板页.html">
       <i class="fas fa-chart-pie"></i><span class="nav-text">报表看板</span>
     </div>
-    <div class="nav-item" data-href="PG13-趋势分析.html">
-      <i class="fas fa-chart-area"></i><span class="nav-text">趋势分析</span>
+    <div class="nav-item" data-href="A24-机构增长分析页.html">
+      <i class="fas fa-chart-line"></i><span class="nav-text">机构增长分析</span>
+    </div>
+    <div class="nav-item" data-href="A25-空间活跃分析页.html">
+      <i class="fas fa-chart-area"></i><span class="nav-text">空间活跃分析</span>
+    </div>
+    <div class="nav-item" data-href="A26-数据流通分析页.html">
+      <i class="fas fa-exchange-alt"></i><span class="nav-text">数据流通分析</span>
     </div>
 
-    <div class="nav-group-title">系统审计</div>
-    <div class="nav-item" data-href="PG14-操作日志.html">
-      <i class="fas fa-shield-halved"></i><span class="nav-text">操作日志</span>
+    <div class="nav-group-title">审计存证</div>
+    <div class="nav-item" data-href="A27-存证检索页.html">
+      <i class="fas fa-shield-halved"></i><span class="nav-text">存证检索</span>
     </div>
-      </nav>
-      <div class="sidebar-footer">
+  </nav>
+  <div class="sidebar-footer">
     <i class="fas fa-user-shield"></i><span class="org-info-text">平台运营方 · 管理端</span>
-      </div>
-      <div class="collapse-toggle" onclick="toggleStdSidebar(this)">
+  </div>
+  <div class="collapse-toggle" onclick="toggleStdSidebar(this)">
     <i class="fas fa-chevron-left"></i>
-      </div>
-    </aside>
+  </div>
+</aside>
     <div style="flex:1;display:flex;flex-direction:column;overflow:hidden;">
-      <header class="topbar"><div class="topbar-left"><i class="fas fa-home" style="color:var(--slate-400);"></i><span>首页</span><i class="fas fa-chevron-right" style="font-size:9px;color:var(--slate-300);"></i><span>资源管理</span><i class="fas fa-chevron-right" style="font-size:9px;color:var(--slate-300);"></i><span>资源目录管理</span><i class="fas fa-chevron-right" style="font-size:9px;color:var(--slate-300);"></i><span style="color:var(--slate-700);">资源详情</span></div><div class="topbar-right"><div class="notify-bell"><i class="fas fa-bell"></i><span class="badge">3</span></div><span class="org-name">平台运营管理员<i class="fas fa-caret-down" style="font-size:10px;margin-left:2px;"></i></span><div class="user-avatar">运</div></div></header>
+      <header class="topbar"><div class="topbar-left"><i class="fas fa-home" style="color:var(--slate-400);"></i><span>首页</span><i class="fas fa-chevron-right" style="font-size:9px;color:var(--slate-300);"></i><span>数据治理</span><i class="fas fa-chevron-right" style="font-size:9px;color:var(--slate-300);"></i><span>数据目录管理</span><i class="fas fa-chevron-right" style="font-size:9px;color:var(--slate-300);"></i><span style="color:var(--slate-700);">数据资源详情</span></div><div class="topbar-right"><div class="notify-bell"><i class="fas fa-bell"></i><span class="badge">3</span></div><span class="org-name">平台运营管理员<i class="fas fa-caret-down" style="font-size:10px;margin-left:2px;"></i></span><div class="user-avatar">运</div></div></header>
       <div class="content-area">
-        <div style="margin-bottom:12px;"><a href="PG7-资源目录列表页.html" style="color:var(--brand);font-size:13px;text-decoration:none;display:inline-flex;align-items:center;gap:6px;cursor:pointer;"><i class="fas fa-arrow-left"></i> 返回列表</a></div>
-        <div class="page-title">资源详情</div>
+        <div style="margin-bottom:12px;"><a href="A7-目录管理列表页.html" style="color:var(--brand);font-size:13px;text-decoration:none;display:inline-flex;align-items:center;gap:6px;cursor:pointer;"><i class="fas fa-arrow-left"></i> 返回列表</a></div>
+        <div class="page-title">数据资源详情</div>
 
         <!-- 状态条 -->
         <div class="proto-element status-bar" data-proto-id="1">
-          <div class="sb-left"><div class="sb-title">示例空气质量数据集</div><span class="tag tag-green">已上架</span></div>
-          <div class="sb-meta"><span>资源标识：<span class="mono">res:demo:abc12345</span></span><span>提供方：示例研究院</span></div>
+          <div class="sb-left"><div class="sb-title">环境监测站点空气质量数据集</div><span class="tag tag-green">已上架</span></div>
+          <div class="sb-meta"><span>资源标识：<span class="mono">res:env:8f3ac91e</span></span><span>提供方：XX环境科学研究院</span></div>
         </div>
 
         <!-- 卡片1：基本信息 -->
         <div class="proto-element card" data-proto-id="2">
           <div class="card-title"><i class="fas fa-circle-info"></i> 基本信息</div>
           <div class="info-grid">
-            <div class="info-item full"><div class="info-label">资源名称</div><div class="info-value">示例空气质量数据集</div></div>
-            <div class="info-item"><div class="info-label">资源标识</div><div class="info-value mono">res:demo:abc12345</div></div>
-            <div class="info-item"><div class="info-label">来源数据源</div><div class="info-value">示例监测数据库</div></div>
-            <div class="info-item"><div class="info-label">提供方</div><div class="info-value link" onclick="navigateTo('PG3-机构详情页.html')">示例研究院</div></div>
-            <div class="info-item"><div class="info-label">所属空间</div><div class="info-value">示例数据协作空间</div></div>
+            <div class="info-item full"><div class="info-label">资源名称</div><div class="info-value">环境监测站点空气质量数据集</div></div>
+            <div class="info-item"><div class="info-label">资源标识</div><div class="info-value mono">res:env:8f3ac91e</div></div>
+            <div class="info-item"><div class="info-label">来源数据源</div><div class="info-value">XX环境监测数据库</div></div>
+            <div class="info-item"><div class="info-label">提供方</div><div class="info-value link" onclick="navigateTo('A3-机构详情页.html')">XX环境科学研究院</div></div>
+            <div class="info-item"><div class="info-label">所属空间</div><div class="info-value">XX环境数据协作空间</div></div>
             <div class="info-item"><div class="info-label">行业分类</div><div class="info-value">N 水利、环境和公共设施管理业</div></div>
             <div class="info-item"><div class="info-label">资源格式</div><div class="info-value">电子表格</div></div>
             <div class="info-item"><div class="info-label">数据来源</div><div class="info-value">原始取得</div></div>
             <div class="info-item"><div class="info-label">是否涉及个人信息</div><div class="info-value"><span class="tag tag-orange">是</span></div></div>
-            <div class="info-item"><div class="info-label">联系人</div><div class="info-value">张三</div></div>
+            <div class="info-item"><div class="info-label">联系人</div><div class="info-value">张管理</div></div>
             <div class="info-item"><div class="info-label">联系方式</div><div class="info-value">0591-87861234</div></div>
             <div class="info-item"><div class="info-label">创建时间</div><div class="info-value">2026-03-12 14:20</div></div>
             <div class="info-item"><div class="info-label">最近更新</div><div class="info-value">2026-06-20 09:30</div></div>
-            <div class="info-item full"><div class="info-label">资源摘要</div><div class="info-value">示例区域实时空气质量数据</div></div>
+            <div class="info-item full"><div class="info-label">资源摘要</div><div class="info-value">各地市环境监测站点实时空气质量数据</div></div>
           </div>
         </div>
 
@@ -405,8 +410,8 @@ body {
           <table class="data-table">
             <thead><tr><th>产品名称</th><th>产品类型</th><th>提供方</th><th>发布状态</th><th>更新时间</th></tr></thead>
             <tbody>
-              <tr><td><span class="action-link" onclick="navigateTo('PG31-数据产品详情页.html')">示例数据API</span></td><td><span class="tag tag-purple">API产品</span></td><td>示例研究院</td><td><span class="tag tag-green">已上架</span></td><td>2026-04-01</td></tr>
-              <tr><td><span class="action-link" onclick="navigateTo('PG31-数据产品详情页.html')">示例数据看板</span></td><td><span class="tag tag-blue">数据应用</span></td><td>示例研究院</td><td><span class="tag tag-green">已上架</span></td><td>2026-05-15</td></tr>
+              <tr><td><span class="action-link" onclick="navigateTo('A31-数据产品详情页.html')">空气质量数据API</span></td><td><span class="tag tag-purple">API产品</span></td><td>XX环境科学研究院</td><td><span class="tag tag-green">已上架</span></td><td>2026-04-01</td></tr>
+              <tr><td><span class="action-link" onclick="navigateTo('A31-数据产品详情页.html')">环境数据看板</span></td><td><span class="tag tag-blue">数据应用</span></td><td>XX环境科学研究院</td><td><span class="tag tag-green">已上架</span></td><td>2026-05-15</td></tr>
             </tbody>
           </table>
         </div>
@@ -415,20 +420,20 @@ body {
         <div class="card">
           <div class="card-title"><i class="fas fa-clock-rotate-left"></i> 操作日志 <span style="font-size:12px;font-weight:400;color:var(--slate-400)">标注操作来源</span></div>
           <div class="timeline">
-            <div class="tl-item"><span class="tl-dot" style="background:var(--brand)"></span><div class="tl-head"><span class="tl-name">创建资源</span><span class="tag tag-gray" style="font-size:10px">参与方·提供方</span><span class="tl-time">2026-03-12 14:00</span></div><div class="tl-desc">示例研究院 创建数据资源并抽取信息项</div></div>
+            <div class="tl-item"><span class="tl-dot" style="background:var(--brand)"></span><div class="tl-head"><span class="tl-name">创建资源</span><span class="tag tag-gray" style="font-size:10px">参与方·提供方</span><span class="tl-time">2026-03-12 14:00</span></div><div class="tl-desc">XX环境科学研究院 创建数据资源并抽取信息项</div></div>
             <div class="tl-item"><span class="tl-dot" style="background:var(--success)"></span><div class="tl-head"><span class="tl-name">上架申请</span><span class="tag tag-gray" style="font-size:10px">参与方·提供方</span><span class="tl-time">2026-03-12 14:05</span></div><div class="tl-desc">提交上架审核申请</div></div>
             <div class="tl-item"><span class="tl-dot" style="background:var(--success)"></span><div class="tl-head"><span class="tl-name">审核通过上架</span><span class="tag tag-gray" style="font-size:10px">参与方·提供方</span><span class="tl-time">2026-03-12 14:20</span></div><div class="tl-desc">平台审核通过，资源上架至目录</div></div>
           </div>
         </div>
 
         <div class="sticky-actions">
-          <button class="btn btn-cancel btn-lg" onclick="navigateTo('PG7-资源目录列表页.html')"><i class="fas fa-arrow-left"></i> 返回列表</button>
+          <button class="btn btn-cancel btn-lg" onclick="navigateTo('A7-目录管理列表页.html')"><i class="fas fa-arrow-left"></i> 返回列表</button>
         </div>
       </div>
     </div>
   </div></div>
   <div style="width:1px;background:var(--amber-border);flex-shrink:0;"></div>
-  <div class="doc-panel" id="rightPanel"><div style="margin-bottom:14px;padding:10px 12px;background:var(--amber-border);border-radius:6px;display:flex;align-items:center;gap:8px;"><span style="background:var(--amber-accent);color:#fff;font-size:10px;font-weight:700;padding:2px 8px;border-radius:3px;">PROTOTYPE</span><span style="font-size:12px;font-weight:600;color:var(--amber-accent);">PG30 资源详情页</span></div><h2>功能说明</h2><div class="proto-desc doc-section" data-proto-desc="1"><div class="doc-label"><span class="doc-num">1</span> 状态条</div><div class="doc-desc">资源名称、发布状态、资源标识、提供方。对齐 W8 数据资源。</div></div><div class="proto-desc doc-section" data-proto-desc="2"><div class="doc-label"><span class="doc-num">2</span> 卡片堆叠</div><div class="doc-desc">弃用页签，改卡片堆叠：①基本信息（14字段含个人信息标识，符合 NDI-TR-2025-06）②信息项（名称/类型/是否敏感）③关联产品（跳A31）④操作日志（含操作来源标签）。字段口径与 W8 统一。</div></div></div>
+  <div class="doc-panel" id="rightPanel"><div style="margin-bottom:14px;padding:10px 12px;background:var(--amber-border);border-radius:6px;display:flex;align-items:center;gap:8px;"><span style="background:var(--amber-accent);color:#fff;font-size:10px;font-weight:700;padding:2px 8px;border-radius:3px;">PROTOTYPE</span><span style="font-size:12px;font-weight:600;color:var(--amber-accent);">A30 数据资源详情页</span></div><h2>功能说明</h2><div class="proto-desc doc-section" data-proto-desc="1"><div class="doc-label"><span class="doc-num">1</span> 状态条</div><div class="doc-desc">资源名称、发布状态、资源标识、提供方。对齐 W8 数据资源。</div></div><div class="proto-desc doc-section" data-proto-desc="2"><div class="doc-label"><span class="doc-num">2</span> 卡片堆叠</div><div class="doc-desc">弃用页签，改卡片堆叠：①基本信息（14字段含个人信息标识，符合 NDI-TR-2025-06）②信息项（名称/类型/是否敏感）③关联产品（跳A31）④操作日志（含操作来源标签）。字段口径与 W8 统一。</div></div></div>
   <svg id="connections-svg"></svg>
 </div>
 <script>
